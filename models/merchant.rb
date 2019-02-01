@@ -35,4 +35,10 @@ class Merchant
     sql = "DELETE FROM merchants;"
     SqlRunner.run(sql)
   end
+
+  def self.find_all()
+    sql = "SELECT * FROM merchants;"
+    results = SqlRunner.run(sql)
+    return results.map{ |row| Merchant.new(row) } if results.count() > 0
+  end
 end

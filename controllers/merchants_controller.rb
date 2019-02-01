@@ -6,7 +6,7 @@ get '/merchants/new' do
 end
 
 # save
-post '/merchants' do
+post '/merchants' do # route must be created as get first
   @merchant = Merchant.new(params)
   @merchant.save()
   erb(:'merchants/index') #needs new method
@@ -29,5 +29,5 @@ end
 post '/merchants/:id/delete' do
   merchant = Merchant.find_by_id(params[:id].to_i) # needs new method
   merchant.delete() if merchant
-  redirect to(:'/merchants/index')
+  redirect to(:'/merchants/index') # route must be created
 end
