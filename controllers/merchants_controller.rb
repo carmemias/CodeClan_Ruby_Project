@@ -1,4 +1,10 @@
-require_relative("../models/merchants")
+require_relative("../models/merchant")
+
+# view all
+get '/merchants' do
+  @merchants = Merchant.find_all()
+  erb(:'/merchants/index')
+end
 
 # create
 get '/merchants/new' do
