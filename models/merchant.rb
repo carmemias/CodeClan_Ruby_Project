@@ -13,8 +13,8 @@ class Merchant
   def save()
     sql = "INSERT INTO merchants (name) VALUES ($1) RETURNING id;"
     values = [@name]
-    returned_id = SqlRunner.run(sql, values)[0]['id'].to_i()
-    @id = returned_id
+    returned_id = SqlRunner.run(sql, values)
+    @id = returned_id[0]['id'].to_i()
   end
 
   # edit
@@ -31,6 +31,13 @@ class Merchant
     SqlRunner.run(sql, values)
   end
 
+  def transactions()
+    sql = "SELECT * FROM transactions INNER JOIN merchants ON transactions.merchant_id = merchants.id WHERE merchants.id = $1;"
+    values = [@id]
+    results = SqlRunner.run(sql, values)
+    return results.map{ |row| Transaction.new(row) } if results.count() > 0
+  end
+
   def self.delete_all()
     sql = "DELETE FROM merchants;"
     SqlRunner.run(sql)
@@ -40,5 +47,12 @@ class Merchant
     sql = "SELECT * FROM merchants;"
     results = SqlRunner.run(sql)
     return results.map{ |row| Merchant.new(row) } if results.count() > 0
+  end
+
+  def self.find_by_id(id)
+    sql = "SELECT * FROM merchants WHERE id = $1;"
+    values = [id]
+    result = SqlRunner.run(sql, values)
+    return Merchant.new(result[0]) if result.count() > 0
   end
 end

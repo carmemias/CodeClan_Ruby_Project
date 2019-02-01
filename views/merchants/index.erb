@@ -1,7 +1,17 @@
 <h1>Merchants</h1>
 
+<% if @error_message %>
+  <p class="error-notification"> <%= @error_message %> </p>
+<% end %>
+
 <% for merchant in @merchants %>
 
 <p><strong>Name:</strong> <%= merchant.name %></p>
+<a href="/merchants/<%= merchant.id %>">View Merchant</a>
+</br>
+<a href="/merchants/<%= merchant.id %>/edit">Edit Merchant</a>
+<form method="post" action="/merchants/<%= merchant.id %>/delete">
+  <input type="submit" value="Delete Merchant">
+</form>
 <hr>
 <% end %>

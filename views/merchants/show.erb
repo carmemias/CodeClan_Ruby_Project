@@ -1,0 +1,7 @@
+<h1>Merchant Information</h1>
+
+<% if !@merchant %>
+<p class="error-notification"><%= @error_message %></p>
+<% else %>
+<p><strong>Name:</strong> <%= @merchant.name %></p>
+<% end %>
