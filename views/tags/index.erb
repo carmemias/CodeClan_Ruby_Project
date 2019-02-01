@@ -1,0 +1,12 @@
+<h1>Tags</h1>
+
+<% for tag in @tags %>
+
+<p><strong>Name:</strong> <%= tag.name %> </p>
+<a href="/tags/<%= tag.id %>">View Tag</a></br>
+<a href="/tags/<%= tag.id %>/edit">Edit Tag</a>
+<form method="post" action="/tags/<%= tag.id %>/delete">
+  <input type="submit" value="Delete Tag">
+</form>
+<hr>
+<% end %>

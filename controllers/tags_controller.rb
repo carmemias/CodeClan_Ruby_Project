@@ -21,20 +21,20 @@ end
 
 # edit
 get '/tags/:id/edit' do
-  @tag = Tag.find_by_id(params['id'].to_i()) # needs new method
+  @tag = Tag.find_by_id(params[:id].to_i()) # needs new method
   erb(:'tags/edit')
 end
 
 # delete single
 post '/tags/:id/delete' do
-  @tag = Tag.find_by_id(params['id'].to_i())
+  @tag = Tag.find_by_id(params[:id].to_i())
   @tag.delete()
   redirect to('/tags')
 end
 
 # show single
 get '/tags/:id' do
-  @tag = Tag.find_by_id(params['id'].to_i())
+  @tag = Tag.find_by_id(params[:id].to_i())
   @error_message = "Tag not found." unless @tag
   erb(:'tags/show')
 end
