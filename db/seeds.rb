@@ -7,3 +7,8 @@ require_relative("../models/tag")
 @tag3 = Tag.new({"name" => "leisure"})
 
 [@tag1, @tag2, @tag3].each{ |tag| tag.save() }
+
+
+
+binding.pry
+nil

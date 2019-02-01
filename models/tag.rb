@@ -19,13 +19,21 @@ class Tag
 
   # edit
   def update()
+    sql = "UPDATE tags SET name = $2 WHERE id = $1;"
+    values = [@id, @name]
+    SqlRunner.run(sql, values)
   end
 
   # delete
   def delete()
+    sql = "DELETE FROM tags WHERE id = $1;"
+    values = [@id]
+    SqlRunner.run(sql, values)
   end
 
   def self.delete_all()
+    sql = "DELETE FROM tags;"
+    SqlRunner.run(sql)
   end
 
 end
