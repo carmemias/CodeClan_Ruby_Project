@@ -28,8 +28,21 @@ end
 # delete single
 post '/tags/:id/delete' do
   @tag = Tag.find_by_id(params[:id].to_i())
-  @tag.delete()
-  redirect to('/tags')
+  @transactions = @tag.transactions()
+
+  if @transactions
+    # we must reassign transactions before deleting the tag.
+
+    # go to a view with a dropdown with a list of current tags
+
+    # user selects a tag and transactions are re-assigned
+
+  end
+
+  # then we can proceed with:
+  
+  # @tag.delete()
+  # redirect to('/tags')
 end
 
 # show single
