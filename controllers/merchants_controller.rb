@@ -34,7 +34,7 @@ post '/merchants/:id/delete' do
     redirect to('/merchants')
   else
     @error_message = "Sorry, merchant #{merchant.name} cannot be deleted because there are transactions linked to it."
-    redirect to('/merchants')
+    erb(:'merchants/show')
   end
   # redirect to('/merchants'), @error_message
 end

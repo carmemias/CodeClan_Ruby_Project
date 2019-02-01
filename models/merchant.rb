@@ -1,4 +1,5 @@
 require_relative( '../db/sql_runner' )
+require_relative( './transaction')
 
 class Merchant
   attr_reader :id
@@ -32,7 +33,7 @@ class Merchant
   end
 
   def transactions()
-    sql = "SELECT * FROM transactions INNER JOIN merchants ON transactions.merchant_id = merchants.id WHERE merchants.id = $1;"
+    sql = "SELECT * FROM transactions WHERE merchant_id = $1;"
     values = [@id]
     results = SqlRunner.run(sql, values)
     return results.map{ |row| Transaction.new(row) } if results.count() > 0
@@ -44,7 +45,7 @@ class Merchant
   end
 
   def self.find_all()
-    sql = "SELECT * FROM merchants;"
+    sql = "SELECT * FROM merchants ORDER BY id;"
     results = SqlRunner.run(sql)
     return results.map{ |row| Merchant.new(row) } if results.count() > 0
   end
