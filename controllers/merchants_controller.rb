@@ -1,7 +1,7 @@
 require("pry")
 require_relative("../models/merchant")
 
-# view all
+# show all
 get '/merchants' do
   @merchants = Merchant.find_all()
   erb(:'/merchants/index')
@@ -42,7 +42,7 @@ end
 # show single
 get '/merchants/:id' do
   @merchant = Merchant.find_by_id(params[:id].to_i)
-  @error_message = "Merchant not found." if !@merchant
+  @error_message = "Merchant not found." unless @merchant
   erb(:'/merchants/show')
 end
 
