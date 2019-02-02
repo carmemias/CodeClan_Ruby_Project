@@ -13,6 +13,7 @@ get '/tags/new' do
 end
 
 # save
+#TODO it'd be great to have unique tag names here...
 post '/tags' do
   @tag = Tag.new(params)
   @tag.save()
@@ -26,23 +27,42 @@ get '/tags/:id/edit' do
 end
 
 # delete single
+# shows a view with a dropdown of current tags, get re-assignment tag
+get '/tags/:id/delete' do
+  @tag = Tag.find_by_id(params[:id].to_i())
+  @all_tags = Tag.find_all()
+  # Note that @all_tags.include?(@tag) will always return false as both methods
+  # create new objects when pulling the data out of the database. So, if we wanted
+  # the tags dropdown not to include the tag we are deleting, we would have to
+  # remove it from the view by checking its id.
+
+  # we must reassign transactions before deleting the tag.
+  if @tag.transactions()
+    # user selects a tag
+  else
+    # message is displayed.
+    # tag can be deleted
+  end
+  erb(:'tags/reassign_tag')
+  # after this, we can proceed with re-assignment and delete
+end
+
+# delete single
+# params passed on = {"new_tag_id"=>"59", "id" => "24"}
 post '/tags/:id/delete' do
   @tag = Tag.find_by_id(params[:id].to_i())
-  @transactions = @tag.transactions()
 
-  if @transactions
-    # we must reassign transactions before deleting the tag.
-
-    # go to a view with a dropdown with a list of current tags
-
-    # user selects a tag and transactions are re-assigned
-
+  # transactions are re-assigned
+  tag_transactions = @tag.transactions()
+  if tag_transactions.count() != 0 && params[:new_tag_id] != ""
+    tag_transactions.each do |transaction|
+      transaction.tag_id = params[:new_tag_id].to_i()
+      transaction.save()
+    end
   end
 
-  # then we can proceed with:
-  
-  # @tag.delete()
-  # redirect to('/tags')
+  @tag.delete()
+  redirect to('/tags')
 end
 
 # show single

@@ -5,8 +5,6 @@
 <p><strong>Name:</strong> <%= tag.name %> </p>
 <a href="/tags/<%= tag.id %>">View Tag</a></br>
 <a href="/tags/<%= tag.id %>/edit">Edit Tag</a>
-<form method="post" action="/tags/<%= tag.id %>/delete">
-  <input type="submit" value="Delete Tag">
-</form>
+<a href="/tags/<%= tag.id %>/delete">Delete Tag</a>
 <hr>
 <% end %>

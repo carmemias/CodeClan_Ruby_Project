@@ -31,6 +31,14 @@ class Tag
     SqlRunner.run(sql, values)
   end
 
+  # find linked transactions
+  def transactions()
+    sql = "SELECT * FROM transactions WHERE tag_id = $1;"
+    values = [@id]
+    results = SqlRunner.run(sql, values)
+    return results.map{ |transaction_data| Transaction.new(transaction_data) } if results
+  end
+
   def self.delete_all()
     sql = "DELETE FROM tags;"
     SqlRunner.run(sql)
@@ -39,7 +47,7 @@ class Tag
   def self.find_all()
     sql = "SELECT * FROM tags ORDER BY id;"
     results = SqlRunner.run(sql)
-    return results.map{ |row| Tag.new(row) } if results
+    return results.map{ |tag_data| Tag.new(tag_data) } if results
   end
 
   def self.find_by_id(id)

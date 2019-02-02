@@ -1,0 +1,17 @@
+<h1>Reassign Tag</h1>
+
+<p>Before deleting a tag, we must re-assign its transactions to a different tag.</p>
+
+<p>Please select a new tag for the transactions currently classified as <%= @tag.name %>:</p>
+
+<form method="post" action="/tags/<%= @tag.id %>/delete">
+
+  <select name="new_tag_id">
+    <% for tag in @all_tags %>
+    <% if tag.id != @tag.id %>
+    <option value="<%= tag.id %>"><%= tag.name %></option>
+    <% end %>
+    <% end %>
+  </select>
+  <input type="submit" value="Reassign and Delete">
+</form>

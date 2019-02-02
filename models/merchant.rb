@@ -36,7 +36,7 @@ class Merchant
     sql = "SELECT * FROM transactions WHERE merchant_id = $1;"
     values = [@id]
     results = SqlRunner.run(sql, values)
-    return results.map{ |row| Transaction.new(row) } if results.count() > 0
+    return results.map{ |transaction_data| Transaction.new(transaction_data) } if results.count() > 0
   end
 
   def self.delete_all()
@@ -47,7 +47,7 @@ class Merchant
   def self.find_all()
     sql = "SELECT * FROM merchants ORDER BY id;"
     results = SqlRunner.run(sql)
-    return results.map{ |row| Merchant.new(row) } if results.count() > 0
+    return results.map{ |merchant_data| Merchant.new(merchant_data) } if results.count() > 0
   end
 
   def self.find_by_id(id)

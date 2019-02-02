@@ -23,7 +23,13 @@ class Transaction
   def self.find_all()
     sql = "SELECT * FROM transactions;"
     results = SqlRunner.run(sql)
-    return results.map{ |row| Transaction.new(row) } if results.count() > 0
+    return results.map{ |transaction_data| Transaction.new(transaction_data) } if results.count() > 0
+  end
+
+  # delete all
+  def self.delete_all()
+    sql = "DELETE FROM transactions;"
+    SqlRunner.run(sql)
   end
 
   # total amount for all transactions
