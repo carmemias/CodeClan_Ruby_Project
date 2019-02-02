@@ -1,17 +1,29 @@
 <h1>Reassign Tag</h1>
 
-<p>Before deleting a tag, we must re-assign its transactions to a different tag.</p>
+<% if @transactions_exist %>
 
-<p>Please select a new tag for the transactions currently classified as <%= @tag.name %>:</p>
+  <p>Before deleting a tag, we must re-assign its transactions to a different tag.</p>
 
-<form method="post" action="/tags/<%= @tag.id %>/delete">
+  <p>Please select a new tag for the transactions currently classified as <%= @tag.name %>:</p>
 
-  <select name="new_tag_id">
-    <% for tag in @all_tags %>
-    <% if tag.id != @tag.id %>
-    <option value="<%= tag.id %>"><%= tag.name %></option>
-    <% end %>
-    <% end %>
-  </select>
-  <input type="submit" value="Reassign and Delete">
-</form>
+  <form method="post" action="/tags/<%= @tag.id %>/delete">
+
+    <select name="new_tag_id">
+      <% for tag in @all_tags %>
+      <% if tag.id != @tag.id %>
+      <option value="<%= tag.id %>"><%= tag.name %></option>
+      <% end %>
+      <% end %>
+    </select>
+    <input type="submit" value="Reassign and Delete">
+  </form>
+
+<% else %>
+
+  <p>There are no transactions linked to tag <%= @tag.name %>.</p>
+  <p>Please click the <strong>Delete</strong> button below to proceed.</p>
+  <form method="post" action="/tags/<%= @tag.id %>/delete">
+    <input type="submit" value="Delete Tag <%= @tag.name %>">
+  </form>
+
+<% end %>

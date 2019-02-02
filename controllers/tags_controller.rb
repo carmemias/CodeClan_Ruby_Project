@@ -37,9 +37,11 @@ get '/tags/:id/delete' do
   # remove it from the view by checking its id.
 
   # we must reassign transactions before deleting the tag.
-  if @tag.transactions()
+  if @tag.transactions.count() > 0
+    @transactions_exist = true
     # user selects a tag
   else
+    @transactions_exist = false
     # message is displayed.
     # tag can be deleted
   end
@@ -53,8 +55,9 @@ post '/tags/:id/delete' do
   @tag = Tag.find_by_id(params[:id].to_i())
 
   # transactions are re-assigned
-  tag_transactions = @tag.transactions()
-  if tag_transactions.count() != 0 && params[:new_tag_id] != ""
+  if params[:new_tag_id] != ""
+    tag_transactions = @tag.transactions()
+
     tag_transactions.each do |transaction|
       transaction.tag_id = params[:new_tag_id].to_i()
       transaction.save()
