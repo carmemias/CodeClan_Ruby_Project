@@ -1,0 +1,18 @@
+<h1>Transactions</h1>
+<!-- Display as responsive table -->
+<% for transaction in @all_transactions %>
+
+<p><strong>Merchant:</strong> <%= transaction.merchant.name %> </p>
+<p><strong>Tag:</strong> <%= transaction.tag.name %> </p>
+<p><strong>Amount:</strong> £<%= sprintf( "%.2f", transaction.amount()/100.00 ) %> </p>
+
+<hr>
+
+<% end %>
+
+<p><strong>Grand Total:</strong> £<%= sprintf( "%.2f", Transaction.calculate_total() / 100.00 ) %></p>
+
+<!--
+See https://stackoverflow.com/questions/15900537/to-d-to-always-return-2-decimals-places-in-ruby
+and https://blog.udemy.com/ruby-sprintf/
+ -->

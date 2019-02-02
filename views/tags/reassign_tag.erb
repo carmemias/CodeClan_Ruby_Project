@@ -1,13 +1,7 @@
 <h1>Reassign Tag</h1>
 
-<% if @all_tags.count == 1 %>
-  <p class="notification">Deleting this tag will also delete all transactions.</p>
-
-  <p>Please click the button below to confirm you wish to proceed with this operation.</p>
-
-  <form method="post" action="/tags/<%= @tag.id %>/delete">
-    <input type="submit" value="Yes, Delete <%= @tag.name %> Tag and All Transactions">
-  </form>
+<% if @all_tags.count == 1 && @transactions_exist %>
+  <p class="notification">In order to delete the last tag, you must delete all transactions first.</p>
 
 <% elsif @transactions_exist %>
 

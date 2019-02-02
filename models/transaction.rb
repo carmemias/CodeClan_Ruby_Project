@@ -1,4 +1,6 @@
 require_relative( '../db/sql_runner' )
+require_relative('../models/merchant')
+require_relative('../models/tag')
 
 class Transaction
   attr_reader :id
@@ -17,6 +19,22 @@ class Transaction
     values = [@amount, @tag_id, @merchant_id]
     returned_id = SqlRunner.run(sql, values)[0]['id'].to_i()
     @id = returned_id
+  end
+
+  # find merchant
+  def merchant()
+    sql = "SELECT * FROM merchants WHERE id = $1;"
+    values = [@merchant_id]
+    result = SqlRunner.run(sql, values)
+    return Merchant.new(result[0]) if result
+  end
+
+  # find tag
+  def tag()
+    sql = "SELECT * FROM tags WHERE id = $1;"
+    values = [@tag_id]
+    result = SqlRunner.run(sql, values)
+    return Tag.new(result[0]) if result
   end
 
   # list all

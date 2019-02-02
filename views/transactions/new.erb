@@ -1,0 +1,19 @@
+<h1>Add a New Transaction</h1>
+
+<form method="post" action="/transactions">
+  <select name="merchant_id">
+    <% for merchant in @all_merchants %>
+    <option value="<%= merchant.id %>"><%= merchant.name %></option>
+    <% end %>
+  </select>
+
+  <select name="tag_id">
+    <% for tag in @all_tags %>
+    <option value="<%= tag.id %>"><%= tag.name %></option>
+    <% end %>
+  </select>
+
+  <label for="amount-spent">Amount spent (in £): </label>
+  <input type="number" min="0.00" step="0.01" name="amount" id="amount-spent" value="">
+  <input type="submit" value="Save Transaction">
+</form>
