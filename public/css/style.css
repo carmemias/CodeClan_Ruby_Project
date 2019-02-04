@@ -5,24 +5,90 @@ body {
 	font-size: 16px;
 	color: #242424;
 }
-h1, h2 {
+h1, h2, #site-title {
 	font-family: 'Montserrat Alternates', sans-serif;
+}
+
+/* header */
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position:absolute;
+	left:0;
+	right:0;
+	top:0;
+	height:50px;
+	background-color: #9EF1E5;
+	color: #242424;
+	z-index:1;
+}
+
+#site-title {
+	width: 30%;
+	height: 28px;
+	padding: 12px;
+	font-size: 1.25em;
+  letter-spacing: .08em;
+}
+
+/* navigation */
+
+nav {
+	width: 50%;
 }
 
 nav > ul {
 	list-style: none;
 	padding-left:0;
+	margin:0;
 	display: flex;
 	justify-content: space-around;
 }
 
 nav li {
-	height: 28px;
+	max-height: 50px;
+	position:relative;
 }
 
 nav li a {
-	padding: 5px 10px;
+	padding: 12px 20px;
+	color: #000;
 	text-decoration: none;
+}
+
+nav li a:hover,
+nav li a:focus {
+	background-color: #22C4AD;
+}
+
+/** submenu **/
+nav > ul > .has-submenu > a::after {
+	content: ' *';
+}
+
+.has-submenu > ul {
+	display:none;
+	position:absolute;
+	top: 35px;
+	padding-left:0;
+	padding-top:20px;
+	width:100%;
+	background-color: #9EF1E5;
+	z-index: 10;
+}
+
+.has-submenu:hover > ul,
+.has-submenu:focus > ul {
+	display: flex;
+	flex-direction: column;
+	list-style: none;
+	height: auto;
+}
+
+/* main content */
+main {
+	margin-top:50px;
 }
 
 .notification{
