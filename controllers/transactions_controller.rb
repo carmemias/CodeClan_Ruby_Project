@@ -10,6 +10,12 @@ get '/transactions' do
   erb(:'transactions/index')
 end
 
+# view all, by date
+get '/transactions/by_date' do
+  @all_transactions = Transaction.find_all_by_date()
+  erb(:'transactions/index_by_date')
+end
+
 # create
 get '/transactions/new' do
   @all_tags = Tag.find_all()

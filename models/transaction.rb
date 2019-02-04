@@ -49,6 +49,13 @@ class Transaction
     return results.map{ |transaction_data| Transaction.new(transaction_data) } if results.count() > 0
   end
 
+  # list all, by date
+  def self.find_all_by_date()
+    sql = "SELECT * FROM transactions ORDER BY transaction_time;"
+    results = SqlRunner.run(sql)
+    return results.map{ |transaction_data| Transaction.new(transaction_data) } if results.count() > 0
+  end
+
   # delete all
   def self.delete_all()
     sql = "DELETE FROM transactions;"
