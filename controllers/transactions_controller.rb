@@ -8,19 +8,16 @@ require_relative("../models/merchant")
 get '/transactions' do
   @all_tags = Tag.find_all()
 
-  if !params
+  if params.empty?
     @all_transactions = Transaction.find_all()
+    @page_subtitle = "All Transactions"
   else
-    @all_transactions = Transaction.filter(params['tag_id'], params['start_date'], params['end_date'], params['order'])
+    @all_transactions = Transaction.filter(params['tag_id'], params['start_date'], params['end_date'])
+    tag_name = Tag.find_by_id(params['tag_id']).name.capitalize() if params['tag_id'] != '0'
+    start_date = DateTime.parse(params['start_date']).strftime("%e %B %Y, %I:%M %P")
+    end_date = DateTime.parse(params['end_date']).strftime("%e %B %Y, %I:%M %P")
+    @page_subtitle = "#{tag_name} Transactions, from #{start_date} to #{end_date}"
   end
-  #
-  # if params['tag_id'] != ""
-  #   @all_transactions = Transaction.find_by_tag(params['tag_id'].to_i())
-  # elsif params['tag_id'] == "" && (params['start_date'] || params['end_date'])
-  #   @all_transactions = Transaction.find_by_date(params['start_date'], params['end_date'])
-  # else
-  #
-  # end
 
   erb(:'transactions/index')
 end

@@ -1,27 +1,24 @@
-<h1>Transactions</h1>
+<h1>View Transactions</h1>
 
 <form method="get" action="/transactions">
   <fieldset>
     <legend>Filter by:</legend>
     <label for="tag">Tag:</label>
     <select name="tag_id" id="tag">
-        <option value="">all tags</option>
+        <option value="0">all tags</option>
       <% @all_tags.each do |tag| %>
         <option value="<%= tag.id %>"><%= tag.name %></option>
       <% end %>
     </select>
-    <label for="start-date">Between: </label>
+    <label for="start-date">Start Date: </label>
     <input type="datetime-local" name="start_date" id="start-date" value="<%= Transaction.earliest_time() %>">
-    <label for="end-date">And: </label>
+    <label for="end-date">End Date: </label>
     <input type="datetime-local" name="end_date" id="end-date" value="<%= Transaction.most_recent_time() %>">
-    <label for="order">Order</label>
-    <select name="order" id="order">
-      <option value="ASC">Oldest to Newest</option>
-      <option value="DESC">Newest to Oldest</option>
-    </select>
   </fieldset>
   <input type="submit" value="Filter">
 </form>
+
+<h2><%= @page_subtitle %></h2>
 
 <% for transaction in @all_transactions %>
 

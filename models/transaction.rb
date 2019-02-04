@@ -51,24 +51,17 @@ class Transaction
     return results.map{ |transaction_data| Transaction.new(transaction_data) } if results.count() > 0
   end
 
-  def self.filter(tag_id, start_date, end_date, order)
-    binding.pry
-    self.find_all()
-
-  end
-
-  def self.find_by_date(start_date, end_date)
-    sql = "SELECT * FROM transactions WHERE transaction_time BETWEEN $1 AND $2;"
-    values = [start_date, end_date]
+  def self.filter(tag_id, start_date = Transaction.earliest_time(), end_date = Transaction.most_recent_time())
+    # SELECT * FROM transactions WHERE tag_id = 34 AND transaction_time BETWEEN '2012-03-01 00:00:00'::timestamp AND '2018-10-31 00:00:00'::timestamp;
+    if tag_id != '0'
+      sql = "SELECT * FROM transactions WHERE tag_id = $1 AND transaction_time BETWEEN $2::timestamp AND $3::timestamp"
+      values = [tag_id, start_date, end_date]
+    else
+      sql = "SELECT * FROM transactions WHERE transaction_time BETWEEN $1::timestamp AND $2::timestamp"
+      values = [start_date, end_date]
+    end
     results = SqlRunner.run(sql, values)
     return results.map{ |transaction_data| Transaction.new(transaction_data) } if results.count() > 0
-  end
-
-  def self.find_by_tag(tag_id)
-    sql = "SELECT * FROM transactions WHERE tag_id = $1;"
-    values = [tag_id]
-    results = SqlRunner.run(sql, values)
-    return results.map{|transaction_data| Transaction.new(transaction_data)} if results
   end
 
   # delete all
