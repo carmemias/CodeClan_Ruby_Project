@@ -3,7 +3,7 @@
 DROP TABLE IF EXISTS transactions;
 DROP TABLE IF EXISTS merchants;
 DROP TABLE IF EXISTS tags;
-DROP TABLE IF EXISTS user_settings;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE tags (
 	id serial8 PRIMARY KEY,
@@ -23,7 +23,7 @@ CREATE TABLE transactions (
 	merchant_id INT8 REFERENCES merchants(id)
 );
 
-CREATE TABLE user_settings (
+CREATE TABLE users (
 	id serial8 PRIMARY KEY,
 	first_name VARCHAR(255),
 	last_name VARCHAR(255),

@@ -1,0 +1,14 @@
+<h1>Edit User Profile</h1>
+
+<form method="post" action="/users/<%= @user.id %>">
+  <label for="first-name">First Name:</label>
+  <input type="text" id="first-name" name="first_name" value="<%= @user.first_name %>">
+
+  <label for="last-name">Last Name:</label>
+  <input type="text" id="last-name" name="last_name" value="<%= @user.last_name %>">
+
+  <label for="budget">Budget:</label>
+  <input type="number" min="0.00" step="0.01" id="budget" name="budget" value="<%= sprintf( "%.2f", @user.budget  / 100.00 ) %>">
+
+  <input type="submit" value="Save Changes">
+</form>

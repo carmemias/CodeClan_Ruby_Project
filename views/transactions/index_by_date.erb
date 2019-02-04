@@ -12,7 +12,7 @@
 
 <% end %>
 
-<p><strong>Grand Total:</strong> £<%= sprintf( "%.2f", Transaction.calculate_total() / 100.00 ) %></p>
+<p><strong>Grand Total:</strong> £<%= sprintf( "%.2f", Transaction.calculate_total_spend() / 100.00 ) %></p>
 
 <!--
 See https://stackoverflow.com/questions/15900537/to-d-to-always-return-2-decimals-places-in-ruby

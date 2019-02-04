@@ -63,7 +63,7 @@ class Transaction
   end
 
   # total amount for all transactions
-  def self.calculate_total()
+  def self.calculate_total_spend()
     all_transactions = Transaction.find_all()
     total = 0
     all_transactions.each { |transaction| total += transaction.amount }

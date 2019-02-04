@@ -3,10 +3,15 @@ require("pry")
 require_relative("../models/tag")
 require_relative("../models/merchant")
 require_relative("../models/transaction")
+require_relative("../models/user")
 
 Transaction.delete_all()
 Tag.delete_all()
 Merchant.delete_all()
+User.delete_all()
+
+@user1 = User.new({"first_name" => "Jon", "last_name" => "Snow", "budget" => 10000})
+@user1.save()
 
 @tag1 = Tag.new({"name" => "groceries"})
 @tag2 = Tag.new({"name" => "public transport"})
