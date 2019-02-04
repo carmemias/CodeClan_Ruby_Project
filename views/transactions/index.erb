@@ -1,7 +1,8 @@
 <h1>Transactions</h1>
-<!-- Display as responsive table -->
+
 <% for transaction in @all_transactions %>
 
+<p><strong>Date and time</strong> <%= transaction.time_as_string() %> </p>
 <p><strong>Merchant:</strong> <%= transaction.merchant.name %> </p>
 <p><strong>Tag:</strong> <%= transaction.tag.name %> </p>
 <p><strong>Amount:</strong> £<%= sprintf( "%.2f", transaction.amount()/100.00 ) %> </p>

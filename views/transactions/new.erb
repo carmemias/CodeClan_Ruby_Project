@@ -15,5 +15,10 @@
 
   <label for="amount-spent">Amount spent (in £): </label>
   <input type="number" min="0.00" step="0.01" name="amount" id="amount-spent" value="">
+
+  <label for="date-and-time">Date and Time:</label>
+  <input type="datetime-local" id="date-and-time" name="transaction_time" value="<%= Time.now().strftime("%FT%H:%M") %>" max="<%= Time.now().strftime("%FT%H:%M").to_s() %>">
   <input type="submit" value="Save Transaction">
 </form>
+
+<!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local -->

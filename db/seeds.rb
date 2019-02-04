@@ -21,10 +21,10 @@ Merchant.delete_all()
 
 [@merchant1, @merchant2, @merchant3, @merchant4].each{ |merchant| merchant.save() }
 
-@transaction1 = Transaction.new({"amount" => 5203, "time" => Time.now(), "tag_id" => @tag1.id, "merchant_id" => @merchant1.id})
-@transaction2 = Transaction.new({"amount" => 2000, "time" => Time.now(), "tag_id" => @tag2.id, "merchant_id" => @merchant3.id})
-@transaction3 = Transaction.new({"amount" => 800, "time" => Time.now(), "tag_id" => @tag3.id, "merchant_id" => @merchant4.id})
-@transaction4 = Transaction.new({"amount" => 385, "time" => Time.now(), "tag_id" => @tag1.id, "merchant_id" => @merchant1.id})
+@transaction1 = Transaction.new({"amount" => 5203, "transaction_time" => Time.now(), "tag_id" => @tag1.id, "merchant_id" => @merchant1.id})
+@transaction2 = Transaction.new({"amount" => 2000, "transaction_time" => Time.now(), "tag_id" => @tag2.id, "merchant_id" => @merchant3.id})
+@transaction3 = Transaction.new({"amount" => 800, "transaction_time" => Time.now(), "tag_id" => @tag3.id, "merchant_id" => @merchant4.id})
+@transaction4 = Transaction.new({"amount" => 385, "transaction_time" => Time.now(), "tag_id" => @tag1.id, "merchant_id" => @merchant1.id})
 
 [@transaction1, @transaction2, @transaction3, @transaction4].each{ |transaction| transaction.save() }
 

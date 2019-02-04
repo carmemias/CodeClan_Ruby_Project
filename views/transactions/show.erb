@@ -1,5 +1,6 @@
 <h1>Transaction Details</h1>
 
+<p><strong>Date and time</strong> <%= @transaction.time_as_string() %> </p>
 <p><strong>Merchant:</strong> <%= @transaction.merchant.name %> </p>
 <p><strong>Tag:</strong> <%= @transaction.tag.name %> </p>
 <p><strong>Amount:</strong> £<%= sprintf( "%.2f", @transaction.amount()/100.00 ) %> </p>

@@ -4,19 +4,20 @@ require_relative('../models/tag')
 
 class Transaction
   attr_reader :id
-  attr_accessor :amount, :tag_id, :merchant_id
+  attr_accessor :amount, :time, :tag_id, :merchant_id
 
   def initialize(options)
     @id = options['id'].to_i() if options['id']
     @amount = options['amount'].to_i()
+    @transaction_time = options['transaction_time']
     @tag_id = options['tag_id'].to_i()
     @merchant_id = options['merchant_id'].to_i()
   end
 
   # create
   def save()
-    sql = "INSERT INTO transactions (amount, tag_id, merchant_id) VALUES ($1, $2, $3) RETURNING id;"
-    values = [@amount, @tag_id, @merchant_id]
+    sql = "INSERT INTO transactions (amount, transaction_time, tag_id, merchant_id) VALUES ($1, $2, $3, $4) RETURNING id;"
+    values = [@amount, @transaction_time, @tag_id, @merchant_id]
     returned_id = SqlRunner.run(sql, values)[0]['id'].to_i()
     @id = returned_id
   end
@@ -35,6 +36,10 @@ class Transaction
     values = [@tag_id]
     result = SqlRunner.run(sql, values)
     return Tag.new(result[0]) if result
+  end
+
+  def time_as_string()
+    DateTime.parse(@transaction_time).strftime( "%A, %e %B %Y at %I:%M %P")
   end
 
   # list all
