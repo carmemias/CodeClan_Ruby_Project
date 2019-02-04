@@ -6,14 +6,23 @@ require_relative("../models/merchant")
 
 # view all
 get '/transactions' do
-  @all_transactions = Transaction.find_all()
-  erb(:'transactions/index')
-end
+  @all_tags = Tag.find_all()
 
-# view all, by date
-get '/transactions/by_date' do
-  @all_transactions = Transaction.find_all_by_date()
-  erb(:'transactions/index_by_date')
+  if !params
+    @all_transactions = Transaction.find_all()
+  else
+    @all_transactions = Transaction.filter(params['tag_id'], params['start_date'], params['end_date'], params['order'])
+  end
+  #
+  # if params['tag_id'] != ""
+  #   @all_transactions = Transaction.find_by_tag(params['tag_id'].to_i())
+  # elsif params['tag_id'] == "" && (params['start_date'] || params['end_date'])
+  #   @all_transactions = Transaction.find_by_date(params['start_date'], params['end_date'])
+  # else
+  #
+  # end
+
+  erb(:'transactions/index')
 end
 
 # create

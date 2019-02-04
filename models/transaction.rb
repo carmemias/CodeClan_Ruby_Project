@@ -2,9 +2,11 @@ require_relative( '../db/sql_runner' )
 require_relative('../models/merchant')
 require_relative('../models/tag')
 
+require("pry")
+
 class Transaction
   attr_reader :id
-  attr_accessor :amount, :time, :tag_id, :merchant_id
+  attr_accessor :amount, :transaction_time, :tag_id, :merchant_id
 
   def initialize(options)
     @id = options['id'].to_i() if options['id']
@@ -49,11 +51,24 @@ class Transaction
     return results.map{ |transaction_data| Transaction.new(transaction_data) } if results.count() > 0
   end
 
-  # list all, by date
-  def self.find_all_by_date()
-    sql = "SELECT * FROM transactions ORDER BY transaction_time;"
-    results = SqlRunner.run(sql)
+  def self.filter(tag_id, start_date, end_date, order)
+    binding.pry
+    self.find_all()
+
+  end
+
+  def self.find_by_date(start_date, end_date)
+    sql = "SELECT * FROM transactions WHERE transaction_time BETWEEN $1 AND $2;"
+    values = [start_date, end_date]
+    results = SqlRunner.run(sql, values)
     return results.map{ |transaction_data| Transaction.new(transaction_data) } if results.count() > 0
+  end
+
+  def self.find_by_tag(tag_id)
+    sql = "SELECT * FROM transactions WHERE tag_id = $1;"
+    values = [tag_id]
+    results = SqlRunner.run(sql, values)
+    return results.map{|transaction_data| Transaction.new(transaction_data)} if results
   end
 
   # delete all
@@ -68,5 +83,17 @@ class Transaction
     total = 0
     all_transactions.each { |transaction| total += transaction.amount }
     return total
+  end
+
+  def self.most_recent_time()
+    sql = "SELECT * FROM transactions ORDER BY transaction_time DESC;"
+    results = SqlRunner.run(sql)
+    return DateTime.parse(Transaction.new(results.first).transaction_time).strftime("%FT%H:%M") if results
+  end
+
+  def self.earliest_time()
+    sql = "SELECT * FROM transactions ORDER BY transaction_time ASC;"
+    results = SqlRunner.run(sql)
+    return DateTime.parse(Transaction.new(results.first).transaction_time).strftime("%FT%H:%M") if results
   end
 end

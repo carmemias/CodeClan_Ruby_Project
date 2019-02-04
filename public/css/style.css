@@ -86,11 +86,14 @@ nav > ul > .has-submenu > a::after {
 	height: auto;
 }
 
+.has-submenu > ul > li {
+	height:50px;
+}
 /* main content */
 main {
 	margin-top:50px;
 }
 
 .notification{
-
+	color: red;
 }
