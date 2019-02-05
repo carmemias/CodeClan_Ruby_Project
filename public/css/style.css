@@ -47,6 +47,11 @@ header {
   letter-spacing: .08em;
 }
 
+#site-title a {
+	color: #242424;
+	text-decoration: none;
+}
+
 /* navigation */
 nav {
 	font-weight: bold;
@@ -169,45 +174,58 @@ nav > ul > .has-submenu > a::after {
 }
 
 /* Forms */
-input[type="submit"],
-input[type="reset"],
-.btn {
+.inline-form {
+	display: inline-block;
+}
+
+input,
+select {
+	font-size: 1em;
 	font-family: 'Raleway', sans-serif;
+	color: #666;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+
+label {
+	display:inline-block;
+	width: 150px;
+}
+
+.action-buttons {
+	padding-bottom:10px;
+}
+
+.btn {
 	padding: 10px 20px;
-	margin: 10px 10px 10px 0;
+	margin: 10px;
+	margin-left:0;
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	background-color: #fff;
-	font-size: 1em;
-	color: #242424;
 	text-decoration: none;
+	color: #666;
 	box-shadow: 0;
-	transition: box-shadow 400ms ease-in;
+	transition: all 400ms ease-in;
+}
+
+.btn-small {
+	padding: 5px 10px;
+	font-size: 0.95em;
 }
 
 input[type="submit"]:hover,
 input[type="reset"]:hover,
 .btn:hover {
 	box-shadow: 5px 5px 5px #eee;
+	color: #242424;
 }
 
 fieldset {
-border: 1px solid #ccc;
-border-radius: 5px;
-padding: 20px;
-margin-bottom: 10px;
-}
-
-select {
-	font-size: 1em;
-  font-family: 'Raleway', sans-serif;
-	color: #666;
-}
-
-input[type="datetime-local"] {
-	font-size: 1em;
-	font-family: 'Raleway', sans-serif;
-	color: #666;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 20px;
+	margin-bottom: 10px;
 }
 
 .radio-label {

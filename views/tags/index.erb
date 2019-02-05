@@ -2,9 +2,11 @@
 
 <% for tag in @tags %>
 
-<p><strong>Name:</strong> <%= tag.name %> </p>
-<a href="/tags/<%= tag.id %>">View Tag</a></br>
-<a href="/tags/<%= tag.id %>/edit">Edit Tag</a>
-<a href="/tags/<%= tag.id %>/delete">Delete Tag</a>
-<hr>
+  <p><strong>Name:</strong> <%= tag.name %> </p>
+  <div class="action-buttons">
+    <a href="/tags/<%= tag.id %>" class="btn btn-small">View Tag</a>
+    <a href="/tags/<%= tag.id %>/edit" class="btn btn-small">Edit Tag</a>
+    <a href="/tags/<%= tag.id %>/delete" class="btn btn-small">Delete Tag</a>
+  </div>
+  <hr>
 <% end %>

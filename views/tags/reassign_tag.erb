@@ -2,7 +2,6 @@
 
 <% if @all_tags.count == 1 && @transactions_exist %>
   <p class="notification">In order to delete the last tag, you must delete all transactions first.</p>
-
 <% elsif @transactions_exist %>
 
   <p>Before deleting a tag, we must re-assign its transactions to a different tag.</p>
@@ -18,7 +17,7 @@
       <% end %>
       <% end %>
     </select>
-    <input type="submit" value="Reassign and Delete">
+    <input type="submit" value="Reassign and Delete" class="btn btn-small">
   </form>
 
 <% else %>
@@ -26,7 +25,7 @@
   <p>There are no transactions linked to tag <%= @tag.name %>.</p>
   <p>Please click the <strong>Delete</strong> button below to proceed.</p>
   <form method="post" action="/tags/<%= @tag.id %>/delete">
-    <input type="submit" value="Delete Tag <%= @tag.name %>">
+    <input type="submit" value="Delete Tag <%= @tag.name %>" class="btn btn-small">
   </form>
 
 <% end %>

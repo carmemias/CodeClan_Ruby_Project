@@ -36,8 +36,8 @@
     </label>
   </fieldset>
 
-  <input type="submit" value="Filter">
-  <input type="reset" value="Clear Filter">
+  <input type="submit" value="Filter" class="btn">
+  <input type="reset" value="Clear Filter" class="btn">
   <a href="/transactions" class="btn">View all</a>
 </form>
 
@@ -54,10 +54,10 @@
 
 <% end %>
 
-<% if @tag_total %>
-<p><strong>Total spent on <%= @tag_name %>:</strong> £<%= sprintf( "%.2f", @tag_total/100.00 ) %></p>
+<% if @tag_total && @tag_total != 0 %>
+<p><strong>Total spent on current selection:</strong> £<%= sprintf( "%.2f", @tag_total/100.00 ) %></p>
 <% end %>
-<p><strong>Grand Total:</strong> £<%= sprintf( "%.2f", Transaction.calculate_total_spend() / 100.00 ) %></p>
+<p <%= 'class="notification"' if @user.near_budget_limit?() %>><strong>Grand Total:</strong> £<%= sprintf( "%.2f", Transaction.calculate_total_spend() / 100.00 ) %></p>
 
 <!--
 See https://stackoverflow.com/questions/15900537/to-d-to-always-return-2-decimals-places-in-ruby

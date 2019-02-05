@@ -3,10 +3,12 @@ require("pry")
 require_relative("../models/transaction")
 require_relative("../models/tag")
 require_relative("../models/merchant")
+require_relative("../models/user")
 
 # view all
 get '/transactions' do
   @all_tags = Tag.find_all()
+  @user = User.find_all.first
 
   if params.empty?
     @all_transactions = Transaction.find_all()

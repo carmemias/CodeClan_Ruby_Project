@@ -1,24 +1,28 @@
 <h1>Add a New Transaction</h1>
 
 <form method="post" action="/transactions">
-  <select name="merchant_id">
+  <label for="merchant">Merchant:</label>
+  <select name="merchant_id" id="merchant">
     <% for merchant in @all_merchants %>
     <option value="<%= merchant.id %>"><%= merchant.name %></option>
     <% end %>
   </select>
-
-  <select name="tag_id">
+  <br>
+  <label for="tag">Tag:</label>
+  <select name="tag_id" id="tag">
     <% for tag in @all_tags %>
     <option value="<%= tag.id %>"><%= tag.name %></option>
     <% end %>
   </select>
-
+  <br>
   <label for="amount-spent">Amount spent (in £): </label>
-  <input type="number" min="0.00" step="0.01" name="amount" id="amount-spent" value="">
-
+  <input type="number" min="0.00" step="0.01" name="amount" id="amount-spent" value="" required>
+  <br>
   <label for="date-and-time">Date and Time:</label>
   <input type="datetime-local" id="date-and-time" name="transaction_time" value="<%= Time.now().strftime("%FT%H:%M") %>" max="<%= Time.now().strftime("%FT%H:%M").to_s() %>">
-  <input type="submit" value="Save Transaction">
+  <br>
+  <input type="submit" value="Save Transaction" class="btn">
 </form>
 
 <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local -->
+<p>Please note that you will need to add a <a href="/merchants/new">new merchant</a> or a <a href="/tags/new">new tag</a> if the one you need is not on the list.</p>
