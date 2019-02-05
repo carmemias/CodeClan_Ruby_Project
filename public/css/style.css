@@ -5,7 +5,7 @@ body {
 	font-size: 16px;
 	color: #242424;
 }
-h1, h2, #site-title {
+h1, h2, #site-title, #hero {
 	font-family: 'Montserrat Alternates', sans-serif;
 }
 
@@ -19,7 +19,7 @@ header {
 	right:0;
 	top:0;
 	height:50px;
-	background-color: #9EF1E5;
+	background-color: #9EF1E6;
 	color: #242424;
 	z-index:1;
 }
@@ -52,14 +52,14 @@ nav li {
 }
 
 nav li a {
-	padding: 12px 20px;
+	padding: 14px 20px;
 	color: #000;
 	text-decoration: none;
 }
 
 nav li a:hover,
 nav li a:focus {
-	background-color: #22C4AD;
+	background-color: #71E0D0;
 }
 
 /** submenu **/
@@ -74,7 +74,8 @@ nav > ul > .has-submenu > a::after {
 	padding-left:0;
 	padding-top:20px;
 	width:100%;
-	background-color: #9EF1E5;
+	min-width: 130px;
+	background-color: #9EF1E6;
 	z-index: 10;
 }
 
@@ -91,7 +92,43 @@ nav > ul > .has-submenu > a::after {
 }
 /* main content */
 main {
+	margin:50px auto;
+	padding:30px;
+	width: 1100px;
+}
+
+#hero {
+	font-size: 2.5em;
+	padding: 50px;
+	line-height: 1.25em;
+}
+
+#home-options {
+	display: flex;
+	justify-content: space-around;
 	margin-top:50px;
+}
+
+.card {
+	width:28%;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	height:200px;
+	background-color: #fff;
+	text-align:center;
+	box-shadow:0;
+	transition: box-shadow 400ms ease-in;
+}
+
+.card:hover,
+.card:focus {
+	box-shadow: 5px 5px 5px #eee;
+}
+
+.card > p {	padding: 70px 0px; }
+.card a {
+	color: #242424;
+	text-decoration:none;
 }
 
 .notification{

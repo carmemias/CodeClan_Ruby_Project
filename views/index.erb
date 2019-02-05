@@ -1,1 +1,18 @@
-<h1>CodeClan Spending Tracker</h1>
+<section id="hero">
+  <p>Hello <%= @user.first_name %>, </p>
+  <p>What do you want to do today?</p>
+</section>
+
+<section id="home-options">
+  <div class="card">
+    <p><a href="/transactions">View all transactions</a></p>
+  </div>
+
+  <div class="card">
+    <p><a href="/users/<%= @user.id %>/edit">Set a budget</a></p>
+  </div>
+
+  <div class="card">
+    <p><a href="/merchants/new">Add a new merchant</a></p>
+  </div>
+</section>

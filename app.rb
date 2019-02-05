@@ -8,5 +8,6 @@ require_relative("./controllers/users_controller")
 also_reload("./models/*")
 
 get '/' do
+  @user = User.find_all().first
   erb(:index)
 end

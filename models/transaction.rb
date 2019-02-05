@@ -51,7 +51,7 @@ class Transaction
     return results.map{ |transaction_data| Transaction.new(transaction_data) } if results.count() > 0
   end
 
-  def self.filter(tag_id, start_date = Transaction.earliest_time(), end_date = Transaction.most_recent_time())
+  def self.filter(tag_id, start_date = Transaction.earliest_time(), end_date = Transaction.most_recent_time(), order_by_time)
     # SELECT * FROM transactions WHERE tag_id = 34 AND transaction_time BETWEEN '2012-03-01 00:00:00'::timestamp AND '2018-10-31 00:00:00'::timestamp;
     if tag_id != '0'
       sql = "SELECT * FROM transactions WHERE tag_id = $1 AND transaction_time BETWEEN $2::timestamp AND $3::timestamp"
@@ -61,7 +61,19 @@ class Transaction
       values = [start_date, end_date]
     end
     results = SqlRunner.run(sql, values)
-    return results.map{ |transaction_data| Transaction.new(transaction_data) } if results.count() > 0
+
+    if results.count() > 0
+      transactions = results.map{ |transaction_data| Transaction.new(transaction_data) }
+
+      case order_by_time
+      when 'asc'
+        return transactions.sort_by{ |t| t.transaction_time }
+      when 'desc'
+        return transactions.sort_by{ |t| t.transaction_time }.reverse
+      else
+        return transactions
+      end
+    end
   end
 
   # delete all
@@ -79,14 +91,14 @@ class Transaction
   end
 
   def self.most_recent_time()
-    sql = "SELECT * FROM transactions ORDER BY transaction_time DESC;"
-    results = SqlRunner.run(sql)
-    return DateTime.parse(Transaction.new(results.first).transaction_time).strftime("%FT%H:%M") if results
+    last_transaction = Transaction.find_all().sort_by!{|t| t.transaction_time }.reverse.first
+    # rounds up the minutes to make sure the most recent transaction is included in the filter results.
+    return (DateTime.parse(last_transaction.transaction_time) + Rational(1, 1440)).strftime("%FT%H:%M")
   end
 
   def self.earliest_time()
-    sql = "SELECT * FROM transactions ORDER BY transaction_time ASC;"
-    results = SqlRunner.run(sql)
-    return DateTime.parse(Transaction.new(results.first).transaction_time).strftime("%FT%H:%M") if results
+    first_transaction = Transaction.find_all().sort_by{|t| t.transaction_time }.first
+    return DateTime.parse(first_transaction.transaction_time).strftime("%FT%H:%M")
   end
+
 end
