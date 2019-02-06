@@ -25,15 +25,15 @@
     <legend>Order results by Transaction Time:</legend>
 
     <label for="unordered" class="radio-label">
-      <input type="radio" name="order_by_time" value="" checked> Unordered
+      <input type="radio" id="unordered" name="order_by_time" value="" checked> Unordered
     </label>
 
     <label for="ascending" class="radio-label">
-      <input type="radio" name="order_by_time" value="asc"> Oldest first
+      <input type="radio" id="ascending" name="order_by_time" value="asc"> Oldest first
     </label>
 
     <label for="descending" class="radio-label">
-      <input type="radio" name="order_by_time" value="desc"> Newest first
+      <input type="radio" id="descending" name="order_by_time" value="desc"> Newest first
     </label>
   </fieldset>
 
@@ -42,7 +42,7 @@
   <a href="/transactions" class="btn">View all</a>
 </form>
 
-<table cellpadding="15">
+<table cellpadding="15" tabindex="0">
   <caption><%= @page_subtitle %></caption>
   <tr>
     <th scope="col">Date and time</th>
