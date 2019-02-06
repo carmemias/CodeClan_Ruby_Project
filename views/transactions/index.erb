@@ -54,7 +54,7 @@
   <tr>
     <td><%= transaction.time_as_string() %></td>
     <td><%= transaction.merchant.name %></td>
-    <td><%= transaction.tag.name %></td>
+    <td><%= transaction.tag.name.capitalize %></td>
     <td>£<%= sprintf( "%.2f", transaction.amount()/100.00 ) %></td>
   </tr>
   <% end %>

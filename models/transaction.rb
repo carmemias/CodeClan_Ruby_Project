@@ -41,7 +41,7 @@ class Transaction
   end
 
   def time_as_string()
-    DateTime.parse(@transaction_time).strftime( "%a. %e %b. %y at %I:%M %P")
+    DateTime.parse(@transaction_time).strftime( "%a. %e %b. %Y at %I:%M %P")
   end
 
   # list all

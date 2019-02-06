@@ -7,7 +7,7 @@
   </tr>
   <% for tag in @tags %>
   <tr>
-    <td><%= tag.name %></td>
+    <td><%= tag.name.capitalize %></td>
     <td>
       <div class="action-buttons">
         <a href="/tags/<%= tag.id %>" class="btn btn-small">View Tag</a>
