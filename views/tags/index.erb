@@ -1,12 +1,20 @@
 <h1>Tags</h1>
 
-<% for tag in @tags %>
-
-  <p><strong>Name:</strong> <%= tag.name %> </p>
-  <div class="action-buttons">
-    <a href="/tags/<%= tag.id %>" class="btn btn-small">View Tag</a>
-    <a href="/tags/<%= tag.id %>/edit" class="btn btn-small">Edit Tag</a>
-    <a href="/tags/<%= tag.id %>/delete" class="btn btn-small">Delete Tag</a>
-  </div>
-  <hr>
-<% end %>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Actions</th>
+  </tr>
+  <% for tag in @tags %>
+  <tr>
+    <td><%= tag.name %></td>
+    <td>
+      <div class="action-buttons">
+        <a href="/tags/<%= tag.id %>" class="btn btn-small">View Tag</a>
+        <a href="/tags/<%= tag.id %>/edit" class="btn btn-small">Edit Tag</a>
+        <a href="/tags/<%= tag.id %>/delete" class="btn btn-small">Delete Tag</a>
+      </div>
+    </td>
+  </tr>
+  <% end %>
+</table>

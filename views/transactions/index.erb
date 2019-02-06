@@ -1,6 +1,6 @@
 <h1>View Transactions</h1>
 
-<form method="get" action="/transactions">
+<form method="get" action="/transactions" id="filter">
   <fieldset>
     <legend>Filter by Tag:</legend>
     <label for="tag">Choose the tag:</label>
@@ -41,23 +41,34 @@
   <a href="/transactions" class="btn">View all</a>
 </form>
 
-<h2><%= @page_subtitle %></h2>
+<table cellpadding="15">
+  <caption><%= @page_subtitle %></caption>
+  <tr>
+    <th>Date and time</th>
+    <th>Merchant</th>
+    <th>Tag</th>
+    <th>Amount</th>
+  </tr>
+  <% for transaction in @all_transactions %>
+  <tr>
+    <td><%= transaction.time_as_string() %></td>
+    <td><%= transaction.merchant.name %></td>
+    <td><%= transaction.tag.name %></td>
+    <td>£<%= sprintf( "%.2f", transaction.amount()/100.00 ) %></td>
+  </tr>
+  <% end %>
+  <% if @tag_total && @tag_total != 0 %>
+  <tr class="show-total">
+    <td colspan="3">Total spent on current selection:</td>
+    <td>£<%= sprintf( "%.2f", @tag_total/100.00 ) %></td>
+  </tr>
+  <% end %>
+  <tr class="show-total <%= 'notification' if @user.near_budget_limit?() %>">
+    <td colspan="3"> Grand Total: </td>
+    <td>£<%= sprintf( "%.2f", Transaction.calculate_total_spend() / 100.00 ) %></td>
+  </tr>
+</table>
 
-<% for transaction in @all_transactions %>
-
-<p><strong>Date and time:</strong> <%= transaction.time_as_string() %> </p>
-<p><strong>Merchant:</strong> <%= transaction.merchant.name %> </p>
-<p><strong>Tag:</strong> <%= transaction.tag.name %> </p>
-<p><strong>Amount:</strong> £<%= sprintf( "%.2f", transaction.amount()/100.00 ) %> </p>
-
-<hr>
-
-<% end %>
-
-<% if @tag_total && @tag_total != 0 %>
-<p><strong>Total spent on current selection:</strong> £<%= sprintf( "%.2f", @tag_total/100.00 ) %></p>
-<% end %>
-<p <%= 'class="notification"' if @user.near_budget_limit?() %>><strong>Grand Total:</strong> £<%= sprintf( "%.2f", Transaction.calculate_total_spend() / 100.00 ) %></p>
 
 <!--
 See https://stackoverflow.com/questions/15900537/to-d-to-always-return-2-decimals-places-in-ruby

@@ -4,15 +4,23 @@
   <p class="notification"> <%= @error_message %> </p>
 <% end %>
 
-<% for merchant in @merchants %>
-
-<p><strong>Name:</strong> <%= merchant.name %></p>
-<div class="action-buttons">
-<a href="/merchants/<%= merchant.id %>" class="btn btn-small">View Merchant</a>
-<a href="/merchants/<%= merchant.id %>/edit" class="btn btn-small">Edit Merchant</a>
-<form method="post" action="/merchants/<%= merchant.id %>/delete" class="inline-form">
-  <input type="submit" value="Delete Merchant" class="btn btn-small">
-</form>
-</div>
-<hr>
-<% end %>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Actions</th>
+  </tr>
+  <% for merchant in @merchants %>
+  <tr>
+    <td><%= merchant.name %></td>
+    <td>
+      <div class="action-buttons">
+      <a href="/merchants/<%= merchant.id %>" class="btn btn-small">View Merchant</a>
+      <a href="/merchants/<%= merchant.id %>/edit" class="btn btn-small">Edit Merchant</a>
+      <form method="post" action="/merchants/<%= merchant.id %>/delete" class="inline-form">
+        <input type="submit" value="Delete Merchant" class="btn btn-small">
+      </form>
+      </div>
+    </td>
+  </tr>
+  <% end %>
+</table>

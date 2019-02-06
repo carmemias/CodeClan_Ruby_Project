@@ -3,5 +3,7 @@
 <p><strong>First Name: </strong> <%= @user.first_name %></p>
 <p><strong>Last Name: </strong> <%= @user.last_name %></p>
 <p><strong>Budget: </strong> £<%= sprintf( "%.2f", @user.budget/100.00 ) %></p>
-<p <%= 'class="notification"' if @user.near_budget_limit?() %>><strong>Current Total Spend: </strong> £<%= sprintf( "%.2f", Transaction.calculate_total_spend() / 100.00 ) %></p>
+
 <a href="/users/<%= @user.id %>/edit" class="btn">Edit user details</a>
+
+<p <%= 'class="notification"' if @user.near_budget_limit?() %>><strong>Current Total Spend: </strong> £<%= sprintf( "%.2f", Transaction.calculate_total_spend() / 100.00 ) %></p>
