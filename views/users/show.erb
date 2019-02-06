@@ -1,8 +1,10 @@
 <h1>User Details</h1>
 
-<p><strong>First Name: </strong> <%= @user.first_name %></p>
-<p><strong>Last Name: </strong> <%= @user.last_name %></p>
-<p><strong>Budget: </strong> £<%= sprintf( "%.2f", @user.budget/100.00 ) %></p>
+<div class="user-details">
+  <p><strong>First Name: </strong> <%= @user.first_name %></p>
+  <p><strong>Last Name: </strong> <%= @user.last_name %></p>
+  <p><strong>Budget: </strong> £<%= sprintf( "%.2f", @user.budget/100.00 ) %></p>
+</div>
 
 <a href="/users/<%= @user.id %>/edit" class="btn">Edit user details</a>
 

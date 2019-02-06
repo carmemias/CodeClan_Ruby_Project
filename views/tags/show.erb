@@ -3,5 +3,7 @@
 <% if !@tag %>
 <p class="notification"><%= @error_message %></p>
 <% else %>
-<p><strong>Name:</strong> <%= @tag.name %> </p>
+<div class="tag-details">
+  <p><strong>Name:</strong> <%= @tag.name %> </p>
+</div>
 <% end %>

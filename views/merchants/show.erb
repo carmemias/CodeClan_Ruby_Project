@@ -3,5 +3,7 @@
 <% if !@merchant %>
 <p class="notification"><%= @error_message %></p>
 <% else %>
-<p><strong>Name:</strong> <%= @merchant.name %></p>
+<div class="merchant-details">
+  <p><strong>Name:</strong> <%= @merchant.name %></p>
+</div>
 <% end %>
