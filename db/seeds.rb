@@ -10,7 +10,7 @@ Tag.delete_all()
 Merchant.delete_all()
 User.delete_all()
 
-@user1 = User.new({"first_name" => "Jon", "last_name" => "Snow", "budget" => 10000})
+@user1 = User.new({"first_name" => "Natalia", "last_name" => "Snow", "budget" => 10000})
 @user1.save()
 
 @tag1 = Tag.new({"name" => "groceries"})

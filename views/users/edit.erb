@@ -2,7 +2,7 @@
 
 <form method="post" action="/users/<%= @user.id %>">
   <label for="first-name">First Name:</label>
-  <input type="text" id="first-name" name="first_name" value="<%= @user.first_name %>">
+  <input type="text" id="first-name" name="first_name" value="<%= @user.first_name %>" required>
 <br>
   <label for="last-name">Last Name:</label>
   <input type="text" id="last-name" name="last_name" value="<%= @user.last_name %>">
