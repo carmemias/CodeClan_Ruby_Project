@@ -17,10 +17,10 @@ get '/transactions' do
     @all_transactions = Transaction.filter(params['tag_id'], params['start_date'], params['end_date'], params['order_by_time'])
     @tag_total = 0
     @all_transactions.each{ |transaction| @tag_total += transaction.amount }
-    @tag_name = Tag.find_by_id(params['tag_id']).name.capitalize() if params['tag_id'] != '0'
+    tag_name = Tag.find_by_id(params['tag_id']).name.capitalize() if params['tag_id'] != '0'
     start_date = DateTime.parse(params['start_date']).strftime("%e %B %Y, %I:%M %P")
     end_date = DateTime.parse(params['end_date']).strftime("%e %B %Y, %I:%M %P")
-    @page_subtitle = "#{@tag_name} Transactions, from #{start_date} to #{end_date}"
+    @page_subtitle = "#{tag_name} Transactions, from #{start_date} to #{end_date}"
   end
 
   erb(:'transactions/index')

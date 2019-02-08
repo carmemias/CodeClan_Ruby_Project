@@ -4,6 +4,9 @@ Project specification: [Spending Tracker](Spending_tracker.md)
 
 [Project Planning documents](./planning/planning_diagrams.md).
 
+![Screenshot 1 - homepage](./public/images/ruby-project-home.png)
+![Screenshot 2 - view all transactions page with filter](./public/images/ruby-project-view-transactions.png)
+
 ## Technology
 
 Ruby
