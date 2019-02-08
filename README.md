@@ -4,11 +4,11 @@ Project specification: [Spending Tracker](Spending_tracker.md)
 
 [Project Planning documents](./planning/planning_diagrams.md).
 
-![Screenshot 1 - homepage](./public/images/ruby-project-home.png)
-Homepage view.
+![Screenshot 1 - homepage](./public/images/ruby-project-home_cropped.png)
+_Screenshot 1: Homepage view._
 
 ![Screenshot 2 - view all transactions page with filter](./public/images/ruby-project-view-transactions.png)
-All Transactions view.
+_Screenshot 2: All Transactions view_
 
 ## Technology
 
