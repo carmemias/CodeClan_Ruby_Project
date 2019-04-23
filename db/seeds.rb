@@ -34,5 +34,5 @@ User.delete_all()
 [@transaction1, @transaction2, @transaction3, @transaction4].each{ |transaction| transaction.save() }
 
 
-binding.pry
+# binding.pry
 nil
