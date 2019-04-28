@@ -1,6 +1,8 @@
-# CodeClan Ruby Project
+# Spending Tracker
 
-Project specification: [Spending Tracker](Spending_tracker.md)
+CodeClan Ruby Project, from Thursday 31st January to Wednesday 6th February 2019.
+
+[Project specification](Spending_tracker.md)
 
 [Project Planning documents](./planning/planning_diagrams.md).
 
@@ -13,11 +15,11 @@ _Screenshot 2: All Transactions view_
 ## Technology
 
 Ruby
-Postgress
+PostgreSQL
 Sinatra
 HTML5 and CSS3
 
-No JavaScript.
+No JavaScript allowed.
 
 ## Notes
 
